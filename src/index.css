@@ -47,7 +47,7 @@ body {
 }
 
 .pokedex__details {
-  padding: 1.25rem 1rem;
+  padding: 1rem;
   width: 16.875rem;
   border: 2px solid black;
   border-radius: 0.25rem;
@@ -68,6 +68,10 @@ body {
   margin: 0;
   padding-left: 1rem;
   padding-top: 1.2rem;
+}
+
+.pokedex__details-lists ul li {
+  line-height: 1.4rem;
 }
 
 .pokedex__details-list {
