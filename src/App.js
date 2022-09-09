@@ -14,6 +14,7 @@ function App() {
             setPokemon(
                 pokemonList.filter(monster => monster.name.includes(searchValue))
             )
+            setPokemonDetails();
         })
     }, [searchValue])
 
@@ -55,7 +56,7 @@ function App() {
                             })
                         }
                     </div>
-                )}
+                ) || `No Results Found`}
                 {
                     pokemonDetails && (
                         <div className={'pokedex__details'}>
