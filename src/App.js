@@ -63,29 +63,31 @@ function App() {
                             <div className="pokedex__details-name">
                                 <strong>{pokemonDetails.name}</strong>
                             </div>
-                            <div className="pokedex__details-type">
-                                <strong>Types</strong>
-                                <ul>
-                                    {
-                                        pokemonDetails.types.map(type => {
-                                            return (
-                                                <li key={type.type.name}>{type.type.name}</li>
-                                            )
-                                        })
-                                    }
-                                </ul>
-                            </div>
-                            <div className="pokedex__details-moves">
-                                <strong>Moves</strong>
-                                <ul>
-                                    {
-                                        pokemonDetails.moves.map(move => {
-                                            return (
-                                                <li key={move.move.name}>{move.move.name}</li>
-                                            )
-                                        })
-                                    }
-                                </ul>
+                            <div className="pokedex__details-lists">
+                                <div className="pokedex__details-type pokedex__details-list">
+                                    <strong>Types</strong>
+                                    <ul>
+                                        {
+                                            pokemonDetails.types.map(type => {
+                                                return (
+                                                    <li key={type.type.name}>{type.type.name}</li>
+                                                )
+                                            })
+                                        }
+                                    </ul>
+                                </div>
+                                <div className="pokedex__details-moves pokedex__details-list">
+                                    <strong>Moves</strong>
+                                    <ul>
+                                        {
+                                            pokemonDetails.moves.map(move => {
+                                                return (
+                                                    <li key={move.move.name}>{move.move.name}</li>
+                                                )
+                                            })
+                                        }
+                                    </ul>
+                                </div>
                             </div>
                             { pokemonDetails.chain.evolves_to.length > 0 && (
                             <div className="pokedex__details-evolutions">
