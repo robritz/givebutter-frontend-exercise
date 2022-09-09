@@ -48,6 +48,21 @@ Please take some time to answer the following questions. Your answers should go 
 
 - Given more time, what would you suggest for improving the performance of this app?
 
+A phase 1 update could be to store the pokemon list in an object and perform the filter on that object versus making a fetch for the list on each search keystroke. There may be some hangups with useEffect fetching data on pageload, so I would perform the caching on the first search and make it available for subsequent searches.
+
+If we know the data is only updated say, once a day at a specific time, we could run a cron job to fetch the data and store it in our database. 
+
+Caching each request for pokemon details for repeated retrieval would also help with performance.
+
 - Is there anything you would consider doing if we were to go live with this app?
 
+I would add security checks around the form input to prevent folks and/or bots from running JS from our app. 
+
 - What was the most challenging aspect of this work for you (if at all)?
+
+I was a little rusty on Promises! It was fun to dig up chaining the details and evolution calls to simplify that process. I would love some feedback on whether this approach works well or needs some tweaking. 
+
+I noticed the use of BEM naming conventions, which I'm familiar with but not well versed in. I enjoyed diving into that process and looking for clues into how the team is using them in this instance.
+
+
+Thank you so much for this opportunity! This was a really fun exorcise, I enjoyed it. Cheers!
