@@ -25,16 +25,13 @@ function App() {
         const fetchPokemonDetails = async (name) => await fetchPokemonDetailsByName(name)
        
         fetchPokemonDetails(name).then((result) => {
-            const evolutionChain = getEvolutionChain(result.id)
-            setPokemonDetails(result)
-            console.log(evolutionChain);
+            return result
+        }).then(async result => {
+            return await fetchEvolutionChainById(result.id).then(evolutionChain => {
+                setPokemonDetails({...result, ...evolutionChain})
+            })
         })
-    }
-
-    const getEvolutionChain = async (id) => {
-        const fetchPokemonDetails = async (id) => await fetchEvolutionChainById(id)
-       
-        return fetchPokemonDetails(id).then((result) => result.chain)
+        
     }
 
     return (
@@ -89,18 +86,20 @@ function App() {
                                     }
                                 </ul>
                             </div>
+                            { pokemonDetails.chain.evolves_to.length > 0 && (
                             <div className="evolutions">
                                 <strong>Evolutions</strong>
                                 <ul className="evolutions__list">
                                     {
-                                        pokemonDetails.moves.map(move => {
+                                        pokemonDetails.chain.evolves_to.map(ev => {
                                             return (
-                                                <li key={move.move.name}>{move.move.name}</li>
+                                                <li key={ev.species.name}>{ev.species.name}</li>
                                             )
                                         })
                                     }
                                 </ul>
                             </div>
+                            )}
                         </div>
                     )
                 }
