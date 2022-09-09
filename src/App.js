@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchAllPokemon } from "./api";
+import { fetchAllPokemon, fetchPokemonDetailsByName } from "./api";
 
 function App() {
     const [pokemon, setPokemon] = useState([])
@@ -7,16 +7,13 @@ function App() {
     const [pokemonDetails, setPokemonDetails] = useState()
 
     useEffect(() => {
-        const fetchPokemon = async () => {
-            const {results: pokemonList} = await fetchAllPokemon()
+        const fetchPokemon = async () => await fetchAllPokemon()
 
+        fetchPokemon().then((results) => {
+            const {results: pokemonList} = results
             setPokemon(
                 pokemonList.filter(monster => monster.name.includes(searchValue))
             )
-        }
-
-        fetchPokemon().then(() => {
-            /** noop **/
         })
     }, [searchValue])
 
@@ -24,8 +21,13 @@ function App() {
         setSearchValue(event.target.value)
     }
 
-    const onGetDetails = (name) => async () => {
-        /** code here **/
+    const onGetDetails = (name) => {
+        const fetchPokemonDetails = async (name) => await fetchPokemonDetailsByName(name)
+       
+        fetchPokemonDetails(name).then((result) => {
+            console.log("pokemonDetails", name, result)
+            setPokemonDetails(result)
+        })
     }
 
     return (
@@ -43,7 +45,7 @@ function App() {
                                         <div>
                                             {monster.name}
                                         </div>
-                                        <button onClick={onGetDetails(monster.name)}>Get Details</button>
+                                        <button onClick={() => { onGetDetails(monster.name) }}>Get Details</button>
                                     </div>
                                 )
                             })
@@ -53,7 +55,7 @@ function App() {
                 {
                     pokemonDetails && (
                         <div className={'pokedex__details'}>
-                            {/*  code here  */}
+                            {pokemonDetails.name}
                         </div>
                     )
                 }
