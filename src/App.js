@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchAllPokemon, fetchPokemonDetailsByName } from "./api";
+import { fetchAllPokemon, fetchPokemonDetailsByName, fetchEvolutionChainById } from "./api";
 
 function App() {
     const [pokemon, setPokemon] = useState([])
@@ -25,9 +25,16 @@ function App() {
         const fetchPokemonDetails = async (name) => await fetchPokemonDetailsByName(name)
        
         fetchPokemonDetails(name).then((result) => {
-            console.log("pokemonDetails", name, result)
+            const evolutionChain = getEvolutionChain(result.id)
             setPokemonDetails(result)
+            console.log(evolutionChain);
         })
+    }
+
+    const getEvolutionChain = async (id) => {
+        const fetchPokemonDetails = async (id) => await fetchEvolutionChainById(id)
+       
+        return fetchPokemonDetails(id).then((result) => result.chain)
     }
 
     return (
@@ -55,7 +62,45 @@ function App() {
                 {
                     pokemonDetails && (
                         <div className={'pokedex__details'}>
-                            {pokemonDetails.name}
+                            <div className="name">
+                                <strong>{pokemonDetails.name}</strong>
+                            </div>
+                            <div className="type">
+                                <strong>Types</strong>
+                                <ul className="types">
+                                    {
+                                        pokemonDetails.types.map(type => {
+                                            return (
+                                                <li key={type.type.name}>{type.type.name}</li>
+                                            )
+                                        })
+                                    }
+                                </ul>
+                            </div>
+                            <div className="moves">
+                                <strong>Moves</strong>
+                                <ul className="moves">
+                                    {
+                                        pokemonDetails.moves.map(move => {
+                                            return (
+                                                <li key={move.move.name}>{move.move.name}</li>
+                                            )
+                                        })
+                                    }
+                                </ul>
+                            </div>
+                            <div className="evolutions">
+                                <strong>Evolutions</strong>
+                                <ul className="evolutions__list">
+                                    {
+                                        pokemonDetails.moves.map(move => {
+                                            return (
+                                                <li key={move.move.name}>{move.move.name}</li>
+                                            )
+                                        })
+                                    }
+                                </ul>
+                            </div>
                         </div>
                     )
                 }
