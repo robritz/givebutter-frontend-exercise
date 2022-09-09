@@ -20,12 +20,29 @@ body {
 }
 
 .pokedex__search-input {
+  padding-bottom: 1rem;
 }
 
 .pokedex__search-results {
+  width: 13.75rem;
+  height: 31.25rem;
+  border: 1px solid red;
+  overflow: auto;
 }
 
 .pokedex__list-item {
+  padding: 1.25rem;
+  border-bottom: 1px solid black;
+  white-space: nowrap;
+}
+
+.pokedex__list-item:last-child {
+  border: none;
+}
+
+.pokedex__list-item div {
+  display: inline-block;
+  padding-right: 1rem;
 }
 
 .pokedex__details {

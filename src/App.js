@@ -60,12 +60,12 @@ function App() {
                 {
                     pokemonDetails && (
                         <div className={'pokedex__details'}>
-                            <div className="name">
+                            <div className="pokedex__details-name">
                                 <strong>{pokemonDetails.name}</strong>
                             </div>
-                            <div className="type">
+                            <div className="pokedex__details-type">
                                 <strong>Types</strong>
-                                <ul className="types">
+                                <ul>
                                     {
                                         pokemonDetails.types.map(type => {
                                             return (
@@ -75,9 +75,9 @@ function App() {
                                     }
                                 </ul>
                             </div>
-                            <div className="moves">
+                            <div className="pokedex__details-moves">
                                 <strong>Moves</strong>
-                                <ul className="moves">
+                                <ul>
                                     {
                                         pokemonDetails.moves.map(move => {
                                             return (
@@ -88,9 +88,9 @@ function App() {
                                 </ul>
                             </div>
                             { pokemonDetails.chain.evolves_to.length > 0 && (
-                            <div className="evolutions">
+                            <div className="pokedex__details-evolutions">
                                 <strong>Evolutions</strong>
-                                <ul className="evolutions__list">
+                                <ul>
                                     {
                                         pokemonDetails.chain.evolves_to.map(ev => {
                                             return (
